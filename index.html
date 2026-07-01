@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argon Steel | Industrial Grade Steel Supplier — Cape Town</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black:   #0C0D0F;
+    --dark:    #141517;
+    --mid:     #1B1D20;
+    --card:    #212326;
+    --border:  #2A2C30;
+    --red:     #C8222A;
+    --red-dim: #8B1218;
+    --silver:  #8A929C;
+    --light:   #D6DCE4;
+    --white:   #F0F3F6;
+    --ff-display: 'Bebas Neue', sans-serif;
+    --ff-body: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--light);
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    transition: background 0.4s, box-shadow 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(12,13,15,0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .nav-logo {
+    font-family: var(--ff-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo span {
+    display: inline-block; width: 8px; height: 28px;
+    background: var(--red); border-radius: 2px;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--silver);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--red);
+    color: var(--white) !important;
+    padding: 9px 22px;
+    border-radius: 4px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: #a81c23 !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+    padding: 120px 48px 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 65% 50%, rgba(200,34,42,0.07) 0%, transparent 70%),
+      linear-gradient(160deg, #0C0D0F 0%, #141517 50%, #0C0D0F 100%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  }
+  .hero-lines::before, .hero-lines::after {
+    content: '';
+    position: absolute;
+    background: var(--border);
+  }
+  .hero-lines::before {
+    width: 1px; top: 0; bottom: 0;
+    left: calc(48px + 340px);
+    opacity: 0.4;
+  }
+  .hero-lines::after {
+    height: 1px; left: 0; right: 0;
+    top: 72px; opacity: 0.3;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--ff-display);
+    font-size: clamp(64px, 9vw, 128px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 28px;
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero h1 em { color: var(--red); font-style: normal; }
+  .hero-sub {
+    font-size: 17px; font-weight: 300; color: var(--silver);
+    max-width: 440px; line-height: 1.7;
+    margin-bottom: 44px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .btn-primary {
+    background: var(--red); color: var(--white);
+    padding: 14px 32px; border-radius: 4px;
+    text-decoration: none; font-size: 14px; font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #a81c23; transform: translateY(-1px); }
+  .btn-ghost {
+    color: var(--light); font-size: 14px; font-weight: 500;
+    text-decoration: none; display: flex; align-items: center; gap: 8px;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost svg { transition: transform 0.2s; }
+  .btn-ghost:hover svg { transform: translateX(4px); }
+
+  .hero-stats {
+    position: absolute; right: 48px; bottom: 80px;
+    display: flex; gap: 48px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.9s 1.0s forwards;
+  }
+  .stat { text-align: right; }
+  .stat-number {
+    font-family: var(--ff-display);
+    font-size: 52px; line-height: 1;
+    color: var(--white); letter-spacing: 1px;
+  }
+  .stat-number span { color: var(--red); }
+  .stat-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--silver);
+    margin-top: 4px;
+  }
+  .hero-accent-line {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent);
+  }
+
+  /* ── REVEAL ANIMATION ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── SHARED SECTION STYLES ── */
+  section { padding: 100px 48px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: var(--ff-display);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1; letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .section-sub {
+    font-size: 16px; color: var(--silver); max-width: 480px; line-height: 1.7;
+  }
+  .divider {
+    width: 40px; height: 2px; background: var(--red); margin: 24px 0;
+  }
+
+  /* ── PRODUCTS ── */
+  .products { background: var(--dark); }
+  .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 24px; }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .product-card {
+    background: var(--dark);
+    padding: 44px 32px;
+    cursor: default;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .product-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--red);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .product-card:hover { background: var(--mid); }
+  .product-card:hover::after { transform: scaleX(1); }
+  .product-icon {
+    width: 48px; height: 48px; margin-bottom: 24px;
+    color: var(--red);
+  }
+  .product-card h3 {
+    font-family: var(--ff-display);
+    font-size: 26px; letter-spacing: 1px;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .product-card p {
+    font-size: 14px; color: var(--silver); line-height: 1.6;
+  }
+  .product-tag {
+    display: inline-block; margin-top: 20px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--red);
+    border-bottom: 1px solid var(--red-dim);
+    padding-bottom: 2px;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--black); }
+  .about-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .about-right { display: flex; flex-direction: column; gap: 28px; }
+  .about-image-wrapper {
+    position: relative;
+  }
+  .about-image-block {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; border-radius: 2px;
+  }
+  .about-image-block svg { width: 64px; height: 64px; color: var(--border); }
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--red); color: var(--white);
+    padding: 20px 28px; border-radius: 2px;
+  }
+  .about-badge .big { font-family: var(--ff-display); font-size: 42px; line-height: 1; }
+  .about-badge .small { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.85; }
+  .about-feature {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; background: var(--mid); border: 1px solid var(--border); border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+  .about-feature:hover { border-color: var(--red-dim); }
+  .about-feature-icon {
+    flex-shrink: 0; width: 36px; height: 36px;
+    background: rgba(200,34,42,0.12); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--red);
+  }
+  .about-feature h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .about-feature p { font-size: 13px; color: var(--silver); }
+
+  /* ── SERVICES TICKER ── */
+  .ticker-section { background: var(--red); padding: 18px 0; overflow: hidden; }
+  .ticker-track {
+    display: flex; gap: 0; white-space: nowrap;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-item {
+    font-family: var(--ff-display);
+    font-size: 15px; letter-spacing: 3px;
+    color: rgba(255,255,255,0.85);
+    padding: 0 40px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .ticker-item::after {
+    content: '◆'; font-size: 8px; opacity: 0.5;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── BRANCHES ── */
+  .branches { background: var(--dark); }
+  .branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; margin-top: 60px;
+  }
+  .branch-card {
+    background: var(--mid); border: 1px solid var(--border);
+    padding: 36px 32px; border-radius: 2px;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .branch-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+    background: var(--red);
+  }
+  .branch-card:hover {
+    border-color: var(--red-dim);
+    transform: translateY(-4px);
+  }
+  .branch-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+  }
+  .branch-card h3 {
+    font-family: var(--ff-display);
+    font-size: 28px; color: var(--white); letter-spacing: 1px; margin-bottom: 20px;
+  }
+  .branch-info { display: flex; flex-direction: column; gap: 12px; }
+  .branch-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; color: var(--silver);
+  }
+  .branch-row svg { flex-shrink: 0; margin-top: 2px; color: var(--silver); }
+  .hours-table { margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px; }
+  .hours-row {
+    display: flex; justify-content: space-between;
+    font-size: 13px; padding: 5px 0;
+    color: var(--silver);
+    border-bottom: 1px solid rgba(42,44,48,0.5);
+  }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row span:last-child { color: var(--light); font-weight: 500; }
+
+  /* ── BRANDS ── */
+  .brands { background: var(--black); }
+  .brands-inner { text-align: center; }
+  .brands-grid {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 4px; margin-top: 48px; background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .brand-pill {
+    background: var(--dark);
+    padding: 24px 36px;
+    font-family: var(--ff-display);
+    font-size: 18px; letter-spacing: 2px;
+    color: var(--silver);
+    flex: 1; min-width: 140px; text-align: center;
+    transition: color 0.2s, background 0.2s;
+  }
+  .brand-pill:hover { color: var(--white); background: var(--mid); }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--mid); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  .form-group label {
+    font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--silver);
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--light); padding: 12px 16px; font-size: 14px;
+    font-family: var(--ff-body); border-radius: 2px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--red);
+  }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-group select option { background: var(--card); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .btn-submit {
+    background: var(--red); color: var(--white);
+    padding: 14px 32px; border: none; border-radius: 4px;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
+    cursor: pointer; align-self: flex-start;
+    transition: background 0.2s;
+    font-family: var(--ff-body);
+  }
+  .btn-submit:hover { background: #a81c23; }
+  .contact-info { display: flex; flex-direction: column; gap: 32px; }
+  .contact-info-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-info-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: rgba(200,34,42,0.12); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--red);
+  }
+  .contact-info-text h4 { font-size: 13px; font-weight: 600; color: var(--silver); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .contact-info-text p, .contact-info-text a {
+    font-size: 15px; color: var(--light); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-info-text a:hover { color: var(--red); }
+  .social-links { display: flex; gap: 12px; margin-top: 12px; }
+  .social-link {
+    width: 40px; height: 40px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    color: var(--silver); text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .social-link:hover { border-color: var(--red); color: var(--red); background: rgba(200,34,42,0.08); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 48px 48px 32px;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+    padding-bottom: 32px; border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .footer-logo {
+    font-family: var(--ff-display);
+    font-size: 22px; letter-spacing: 2px; color: var(--white);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footer-logo span { width: 6px; height: 22px; background: var(--red); border-radius: 2px; display: inline-block; }
+  .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13px; color: var(--silver); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: 12px; color: var(--silver); }
+  .footer-reg { font-size: 11px; color: rgba(138,146,156,0.5); }
+
+  /* ── FORM SUCCESS ── */
+  .form-success {
+    display: none;
+    background: rgba(200,34,42,0.1); border: 1px solid var(--red-dim);
+    color: var(--light); padding: 14px 20px; border-radius: 4px;
+    font-size: 14px; align-items: center; gap: 10px;
+  }
+  .form-success.show { display: flex; }
+
+  /* ── SCROLL TO TOP ── */
+  .scroll-top {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 44px; height: 44px;
+    background: var(--red); color: var(--white);
+    border: none; border-radius: 4px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    z-index: 99;
+  }
+  .scroll-top.visible { opacity: 1; transform: translateY(0); }
+  .scroll-top:hover { background: #a81c23; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section { padding: 72px 24px; }
+    .hero { padding: 100px 24px 100px; }
+    .hero-stats { position: static; margin-top: 48px; justify-content: flex-start; }
+    .about-inner { grid-template-columns: 1fr; gap: 48px; }
+    .about-badge { right: 0; bottom: -16px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 48px 24px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo"><span></span>ARGON STEEL</a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#branches">Branches</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div style="position:relative; z-index:1; max-width: 700px;">
+    <p class="hero-eyebrow">Cape Town's Trusted Steel Partner Since 2007</p>
+    <h1>INDUSTRIAL<br><em>GRADE</em><br>STEEL</h1>
+    <p class="hero-sub">Direct to the public. From small DIY projects to large-scale warehouse structures, we've got the steel, the hardware, and the expertise.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#contact" class="btn-ghost">
+        Talk to us
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-number" id="count-years">0<span>+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" id="count-branches">0</div>
+      <div class="stat-label">Branches</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" id="count-products">0<span>+</span></div>
+      <div class="stat-label">Product Lines</div>
+    </div>
+  </div>
+  <div class="hero-accent-line"></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-section">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item">STEEL PRODUCTS</span>
+    <span class="ticker-item">WELDING MACHINES</span>
+    <span class="ticker-item">HARDWARE & TOOLS</span>
+    <span class="ticker-item">FENCING SOLUTIONS</span>
+    <span class="ticker-item">IN-HOUSE GALVANIZING</span>
+    <span class="ticker-item">AUTOMATION PRODUCTS</span>
+    <span class="ticker-item">STRUCTURAL STEEL</span>
+    <span class="ticker-item">SHEETING & PLATE</span>
+    <span class="ticker-item">STEEL PRODUCTS</span>
+    <span class="ticker-item">WELDING MACHINES</span>
+    <span class="ticker-item">HARDWARE & TOOLS</span>
+    <span class="ticker-item">FENCING SOLUTIONS</span>
+    <span class="ticker-item">IN-HOUSE GALVANIZING</span>
+    <span class="ticker-item">AUTOMATION PRODUCTS</span>
+    <span class="ticker-item">STRUCTURAL STEEL</span>
+    <span class="ticker-item">SHEETING & PLATE</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header">
+    <div>
+      <p class="eyebrow reveal">What We Supply</p>
+      <h2 class="section-title reveal reveal-delay-1">PRODUCTS &<br>SERVICES</h2>
+    </div>
+    <p class="section-sub reveal reveal-delay-2" style="text-align:right;">From raw steel to finished hardware — everything you need under one roof, at competitive prices.</p>
+  </div>
+  <div class="products-grid reveal">
+    <div class="product-card">
+      <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="14" width="36" height="6" rx="1"/>
+        <rect x="6" y="24" width="36" height="6" rx="1"/>
+        <rect x="6" y="34" width="36" height="6" rx="1"/>
+        <line x1="12" y1="8" x2="12" y2="42"/>
+        <line x1="36" y1="8" x2="36" y2="42"/>
+      </svg>
+      <h3>STEEL</h3>
+      <p>Tubing, profiles, sheeting, plate, and structural steel for every build size and specification.</p>
+      <span class="product-tag">View Range →</span>
+    </div>
+    <div class="product-card">
+      <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 38 L20 18 L28 26 L38 10"/>
+        <circle cx="38" cy="10" r="3"/>
+        <path d="M14 42 L10 38"/>
+        <path d="M8 44 L6 46"/>
+      </svg>
+      <h3>WELDING</h3>
+      <p>MIG, TIG, arc and inverter welding machines plus a full range of consumables and accessories.</p>
+      <span class="product-tag">View Range →</span>
+    </div>
+    <div class="product-card">
+      <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 36L12 24H36L40 36H8Z"/>
+        <path d="M20 24V16M28 24V16"/>
+        <rect x="16" y="10" width="16" height="8" rx="1"/>
+        <line x1="8" y1="40" x2="40" y2="40"/>
+      </svg>
+      <h3>HARDWARE</h3>
+      <p>Top-quality tools, fasteners, paint, and safety equipment from leading brands at unbeatable prices.</p>
+      <span class="product-tag">View Range →</span>
+    </div>
+    <div class="product-card">
+      <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="10" y1="10" x2="10" y2="40"/>
+        <line x1="20" y1="10" x2="20" y2="40"/>
+        <line x1="30" y1="10" x2="30" y2="40"/>
+        <line x1="38" y1="10" x2="38" y2="40"/>
+        <line x1="10" y1="16" x2="38" y2="16"/>
+        <line x1="10" y1="24" x2="38" y2="24"/>
+        <line x1="10" y1="32" x2="38" y2="32"/>
+        <line x1="10" y1="10" x2="38" y2="10"/>
+        <line x1="10" y1="40" x2="38" y2="40"/>
+      </svg>
+      <h3>FENCING</h3>
+      <p>Palisade, diamond mesh, and clearvu fencing solutions tailored to your security needs and budget.</p>
+      <span class="product-tag">View Range →</span>
+    </div>
+    <div class="product-card">
+      <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M16 8H32L38 20L32 32H16L10 20L16 8Z"/>
+        <circle cx="24" cy="20" r="5"/>
+        <path d="M24 36V42M18 42H30"/>
+      </svg>
+      <h3>GALVANIZING</h3>
+      <p>In-house hot-dip galvanizing services direct to the public — protecting your steel for decades.</p>
+      <span class="product-tag">View Service →</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div style="position:relative;">
+      <div class="about-image-block reveal">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="8" y="16" width="48" height="32" rx="1"/>
+          <line x1="8" y1="24" x2="56" y2="24"/>
+          <line x1="8" y1="32" x2="56" y2="32"/>
+          <line x1="8" y1="40" x2="56" y2="40"/>
+          <line x1="20" y1="16" x2="20" y2="48"/>
+          <line x1="44" y1="16" x2="44" y2="48"/>
+        </svg>
+      </div>
+      <div class="about-badge reveal reveal-delay-1">
+        <div class="big">17+</div>
+        <div class="small">Years in Steel</div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div>
+        <p class="eyebrow reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">YOUR ONE<br>STOP STEEL<br>SHOP</h2>
+        <div class="divider reveal reveal-delay-2"></div>
+        <p class="section-sub reveal reveal-delay-2">Welcome to Argon Steel built on over 17 years of experience from our AR Steelworld days, with a fresh approach to serving Cape Town's builders, fabricators, and DIY community.</p>
+      </div>
+      <div class="about-feature reveal reveal-delay-2">
+        <div class="about-feature-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M9 2L11 7H16L12 10L14 15L9 12L4 15L6 10L2 7H7L9 2Z"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Quality You Can Count On</h4>
+          <p>We stock industrial-grade steel and hardware from reputable brands — built for professionals and weekend warriors alike.</p>
+        </div>
+      </div>
+      <div class="about-feature reveal reveal-delay-3">
+        <div class="about-feature-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="9" cy="9" r="7"/>
+            <path d="M9 5V9L12 11"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Competitive Prices, Always</h4>
+          <p>Direct-to-public pricing means you get the best value without the middleman markup — from small quantities to bulk orders.</p>
+        </div>
+      </div>
+      <div class="about-feature reveal reveal-delay-4">
+        <div class="about-feature-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M2 14C2 11 5 9 9 9C13 9 16 11 16 14"/>
+            <circle cx="9" cy="5" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <h4>A Knowledgeable Team</h4>
+          <p>Our staff know their steel. Whether you need guidance on the right grade or the best welding setup, we're here to help.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANCHES -->
+<section class="branches" id="branches">
+  <div style="text-align:center; max-width: 540px; margin: 0 auto 0;">
+    <p class="eyebrow reveal">Find Us Nearby</p>
+    <h2 class="section-title reveal reveal-delay-1">THREE<br>BRANCHES</h2>
+    <p class="section-sub reveal reveal-delay-2" style="margin: 0 auto;">Conveniently located across Cape Town — we're never far from where you're building.</p>
+  </div>
+  <div class="branches-grid">
+    <div class="branch-card reveal">
+      <p class="branch-label">head office</p>
+      <h3>ATHLONE</h3>
+      <div class="branch-info">
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.8 2 4 3.8 4 6C4 9 8 14 8 14C8 14 12 9 12 6C12 3.8 10.2 2 8 2Z"/><circle cx="8" cy="6" r="1.5"/></svg>
+          59 Pooke Road, Athlone Industria 1
+        </div>
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4C2 3.4 2.4 3 3 3H6L7.5 6L5.5 7.5C6.3 9.1 7 9.8 8.5 10.5L10 8.5L13 10V13C13 13.6 12.6 14 12 14C6.4 14 2 9.6 2 4Z"/></svg>
+          021 633 3480
+        </div>
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 6L8 10L14 6"/></svg>
+          ebrahim@argonsteel.co.za
+        </div>
+      </div>
+      <div class="hours-table">
+        <div class="hours-row"><span>Mon – Fri</span><span>8:00 – 17:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>8:00 – 13:00</span></div>
+        <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+
+    <div class="branch-card reveal reveal-delay-1">
+      <p class="branch-label">Branch</p>
+      <h3>MITCHELL'S PLAIN</h3>
+      <div class="branch-info">
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.8 2 4 3.8 4 6C4 9 8 14 8 14C8 14 12 9 12 6C12 3.8 10.2 2 8 2Z"/><circle cx="8" cy="6" r="1.5"/></svg>
+          Units 1–5, Bravo Street, Mitchell's Plain
+        </div>
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4C2 3.4 2.4 3 3 3H6L7.5 6L5.5 7.5C6.3 9.1 7 9.8 8.5 10.5L10 8.5L13 10V13C13 13.6 12.6 14 12 14C6.4 14 2 9.6 2 4Z"/></svg>
+          021 376 4336
+        </div>
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 6L8 10L14 6"/></svg>
+          tasneemj@argonsteel.co.za
+        </div>
+      </div>
+      <div class="hours-table">
+        <div class="hours-row"><span>Mon – Fri</span><span>8:00 – 17:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>8:00 – 13:00</span></div>
+        <div class="hours-row"><span>Sunday</span><span>8:00 – 13:00</span></div>
+      </div>
+    </div>
+
+    <div class="branch-card reveal reveal-delay-2">
+      <p class="branch-label">Branch</p>
+      <h3>BLUE DOWNS</h3>
+      <div class="branch-info">
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.8 2 4 3.8 4 6C4 9 8 14 8 14C8 14 12 9 12 6C12 3.8 10.2 2 8 2Z"/><circle cx="8" cy="6" r="1.5"/></svg>
+          Cnr Forest Drive & Blue Downs Way
+        </div>
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4C2 3.4 2.4 3 3 3H6L7.5 6L5.5 7.5C6.3 9.1 7 9.8 8.5 10.5L10 8.5L13 10V13C13 13.6 12.6 14 12 14C6.4 14 2 9.6 2 4Z"/></svg>
+          021 909 5175
+        </div>
+        <div class="branch-row">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1"/><path d="M2 6L8 10L14 6"/></svg>
+          leyaket@argonsteel.co.za
+        </div>
+      </div>
+      <div class="hours-table">
+        <div class="hours-row"><span>Mon – Fri</span><span>8:00 – 17:00</span></div>
+        <div class="hours-row"><span>Saturday</span><span>8:00 – 13:00</span></div>
+        <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands" id="brands">
+  <div class="brands-inner">
+    <p class="eyebrow reveal">Trusted Partners</p>
+    <h2 class="section-title reveal reveal-delay-1">PROUD STOCKISTS OF</h2>
+    <p class="section-sub reveal reveal-delay-2" style="margin: 0 auto 0; max-width: 400px;">We stock only reputable brands so you can buy with confidence, every time.</p>
+    <div class="brands-grid reveal">
+      <div class="brand-pill">INCO</div>
+      <div class="brand-pill">TORKCRAFT</div>
+      <div class="brand-pill">CISA</div>
+      <div class="brand-pill">PINNACLE</div>
+      <div class="brand-pill">MATWELD</div>
+      <div class="brand-pill">DROMEX</div>
+      <div class="brand-pill">MEGUIAR'S</div>
+      <div class="brand-pill">TOTAL TOOLS</div>
+      <div class="brand-pill">PFERD</div>
+      <div class="brand-pill">HILLALDAM</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <p class="eyebrow reveal">Get In Touch</p>
+      <h2 class="section-title reveal reveal-delay-1">LET'S TALK<br>STEEL</h2>
+      <div class="divider reveal reveal-delay-1"></div>
+      <p class="section-sub reveal reveal-delay-2">Have a question about stock, pricing, or a bulk order? Our team is ready to help. Fill in the form or reach us directly.</p>
+      <div class="contact-info" style="margin-top:40px;">
+        <div class="contact-info-item reveal reveal-delay-2">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 4C2 3.4 2.4 3 3 3H6L7.5 6L5.5 7.5C6.3 9.1 7 9.8 8.5 10.5L10 8.5L13 10V13C13 13.6 12.6 14 12 14C6.4 14 2 9.6 2 4Z"/></svg>
+          </div>
+          <div class="contact-info-text">
+            <h4>Phone</h4>
+            <a href="tel:0216333480">021 633 3480</a>
+          </div>
+        </div>
+        <div class="contact-info-item reveal reveal-delay-3">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="14" height="12" rx="1"/><path d="M2 7L9 11L16 7"/></svg>
+          </div>
+          <div class="contact-info-text">
+            <h4>Email</h4>
+            <a href="mailto:info@argonsteel.co.za">info@argonsteel.co.za</a>
+          </div>
+        </div>
+        <div class="contact-info-item reveal reveal-delay-4">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2C6.2 2 4 4.2 4 7C4 11 9 16 9 16C9 16 14 11 14 7C14 4.2 11.8 2 9 2Z"/><circle cx="9" cy="7" r="2"/></svg>
+          </div>
+          <div class="contact-info-text">
+            <h4>Main Branch</h4>
+            <p>59 Pooke Rd, Athlone Industria, Cape Town, 7764</p>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-4">
+          <p style="font-size:12px; color:var(--silver); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; font-weight:600;">Follow Us</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/Argonsteel.ct" target="_blank" class="social-link" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.5 2A4.5 4.5 0 0 0 4 6.5c0 1.9 1.2 3.6 2.9 4.2V8.5H5.4V7H6.9V5.8C6.9 4.2 7.8 3.4 9.3 3.4c.7 0 1.4.1 1.4.1v1.5h-.8c-.8 0-1 .5-1 1V7h1.7l-.3 1.5H8.9v2.2A4.5 4.5 0 0 0 8.5 2z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/argonsteel.ct/" target="_blank" class="social-link" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="3"/><circle cx="11.5" cy="4.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/argon-steel-973117315/" target="_blank" class="social-link" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3 5h2v8H3V5zm1-3a1.2 1.2 0 1 1 0 2.4A1.2 1.2 0 0 1 4 2zm3 3h2v1.1C9.4 5.5 10 5 11 5c2 0 2.5 1.3 2.5 3V13h-2V8.5c0-.8-.3-1.5-1.2-1.5s-1.3.7-1.3 1.5V13H7V5z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form reveal reveal-delay-1" id="contact-form">
+        <div class="form-success" id="form-success">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="M6 9l2 2 4-4"/></svg>
+          Message sent! We'll be in touch shortly.
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="021 000 0000">
+        </div>
+        <div class="form-group">
+          <label for="interest">I'm Interested In</label>
+          <select id="interest">
+            <option value="">Select a product or service</option>
+            <option>Steel Products (Tubing, Profiles, Sheeting)</option>
+            <option>Welding Machines & Accessories</option>
+            <option>Hardware & Tools</option>
+            <option>Fencing Solutions</option>
+            <option>Galvanizing Services</option>
+            <option>Bulk / Trade Order</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your project or what you're looking for..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span></span>ARGON STEEL</div>
+    <ul class="footer-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#branches">Branches</a></li>
+      <li><a href="#brands">Brands</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Argon Steel (Pty) Ltd. All rights reserved.</p>
+    <p class="footer-reg">59 Pooke Road, Athlone Industria 1, Cape Town, 7764</p>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="white" stroke-width="2">
+    <path d="M4 11L9 6L14 11"/>
+  </svg>
+</button>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Counter animation
+  function animateCounter(el, target, duration = 1600, suffix = '') {
+    let start = 0, step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.firstChild.textContent = Math.floor(start);
+      if(start >= target) clearInterval(timer);
+    }, 16);
+  }
+  const statsObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        animateCounter(document.getElementById('count-years'), 17);
+        animateCounter(document.getElementById('count-branches'), 3);
+        animateCounter(document.getElementById('count-products'), 5);
+        statsObs.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  statsObs.observe(document.querySelector('.hero-stats'));
+
+  // Contact form
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('form-success').classList.add('show');
+    this.reset();
+    setTimeout(() => document.getElementById('form-success').classList.remove('show'), 5000);
+  });
+
+  // Smooth anchor scrolling
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+</script>
+</body>
+</html>
