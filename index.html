@@ -198,6 +198,74 @@
   .scroll-top.visible { opacity:1; transform:translateY(0); }
   .scroll-top:hover { background:#a81c23; }
 
+
+  /* ── CAREERS ── */
+  .careers { background:var(--black); }
+  .careers-header { display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; margin-bottom:48px; }
+  .careers-filters { display:flex; gap:8px; flex-wrap:wrap; }
+  .filter-btn {
+    background:transparent; border:1px solid var(--border);
+    color:var(--silver); padding:9px 20px; border-radius:4px;
+    font-family:var(--ff-body); font-size:12px; font-weight:600;
+    letter-spacing:1.5px; text-transform:uppercase; cursor:pointer;
+    transition:all 0.2s; white-space:nowrap;
+  }
+  .filter-btn:hover { border-color:var(--silver); color:var(--white); }
+  .filter-btn.active { background:var(--red); border-color:var(--red); color:var(--white); }
+
+  .jobs-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:2px; background:var(--border); border:1px solid var(--border); }
+  .job-card {
+    background:var(--dark); padding:36px 32px;
+    position:relative; overflow:hidden;
+    transition:background 0.3s;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .job-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform 0.35s ease; }
+  .job-card:hover { background:var(--mid); }
+  .job-card:hover::after { transform:scaleX(1); }
+  .job-card[data-hidden="true"] { display:none; }
+
+  .job-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .job-branch-tag {
+    font-size:10px; font-weight:600; letter-spacing:2px;
+    text-transform:uppercase; color:var(--red);
+    background:rgba(200,34,42,0.1); border:1px solid rgba(200,34,42,0.2);
+    padding:4px 10px; border-radius:3px;
+  }
+  .job-type-tag {
+    font-size:10px; font-weight:600; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--silver);
+    background:var(--mid); border:1px solid var(--border);
+    padding:4px 10px; border-radius:3px;
+  }
+  .job-card h3 { font-family:var(--ff-display); font-size:26px; letter-spacing:1px; color:var(--white); line-height:1.1; }
+  .job-card p { font-size:14px; color:var(--silver); line-height:1.65; flex:1; }
+  .job-footer { display:flex; align-items:center; justify-content:space-between; padding-top:16px; border-top:1px solid var(--border); flex-wrap:wrap; gap:12px; }
+  .job-salary { font-size:13px; font-weight:600; color:var(--light); }
+  .job-apply {
+    font-size:11px; font-weight:600; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--red);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+    transition:gap 0.2s;
+  }
+  .job-apply:hover { gap:10px; }
+  .job-apply svg { transition:transform 0.2s; }
+  .job-apply:hover svg { transform:translateX(3px); }
+
+  /* Empty state */
+  .careers-empty {
+    display:none; text-align:center;
+    padding:80px 24px; border:1px solid var(--border); background:var(--dark);
+  }
+  .careers-empty.visible { display:block; }
+  .careers-empty-icon { width:48px; height:48px; color:var(--border); margin:0 auto 20px; }
+  .careers-empty h3 { font-family:var(--ff-display); font-size:28px; color:var(--silver); letter-spacing:1px; margin-bottom:10px; }
+  .careers-empty p { font-size:14px; color:var(--silver); max-width:360px; margin:0 auto; }
+
+  /* Job count badge */
+  .jobs-count { font-size:13px; color:var(--silver); margin-top:20px; }
+  .jobs-count span { color:var(--white); font-weight:600; }
+
   /* ════════════════════════════════
      RESPONSIVE BREAKPOINTS
   ════════════════════════════════ */
@@ -248,6 +316,7 @@
     .about-inner { grid-template-columns:1fr; gap:64px; }
     .about-badge { right:0; bottom:-16px; }
     .contact-inner { gap:32px; }
+    .jobs-grid { grid-template-columns:repeat(2,1fr); }
   }
 
   /* Tablets (≤768px) */
@@ -293,6 +362,10 @@
     .brand-pill { min-width:calc(33.33% - 4px); padding:16px 10px; font-size:14px; }
 
     /* Contact */
+    .careers-header { flex-direction:column; align-items:flex-start; }
+    .careers-filters { width:100%; }
+    .filter-btn { flex:1; text-align:center; padding:10px 12px; font-size:11px; }
+    .jobs-grid { grid-template-columns:1fr; }
     .contact-inner { grid-template-columns:1fr; gap:48px; }
     .form-row { grid-template-columns:1fr; }
     .btn-submit { width:100%; text-align:center; }
@@ -317,6 +390,8 @@
     .stat-label { font-size:8px; letter-spacing:1px; }
     .section-title { font-size:clamp(32px,9vw,52px); }
     .branch-card { padding:28px 20px; }
+    .job-card { padding:28px 20px; }
+    .job-card h3 { font-size:22px; }
     .about-badge { padding:12px 16px; }
     .about-badge .big { font-size:26px; }
     .contact-info { gap:24px; }
@@ -378,6 +453,149 @@
     .brand-pill { font-size:11px; padding:10px 4px; }
   }
 
+
+  /* ── APPLY MODAL ── */
+  .apply-modal-overlay {
+    position:fixed; inset:0; z-index:200;
+    background:rgba(8,9,10,0.92); backdrop-filter:blur(8px);
+    display:flex; align-items:flex-start; justify-content:center;
+    overflow-y:auto; padding:32px 16px 48px;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.3s;
+  }
+  .apply-modal-overlay.open { opacity:1; pointer-events:all; }
+
+  .apply-modal {
+    background:var(--dark); border:1px solid var(--border);
+    border-radius:4px; width:100%; max-width:760px;
+    position:relative; overflow:hidden;
+    transform:translateY(24px);
+    transition:transform 0.35s ease;
+    flex-shrink:0;
+  }
+  .apply-modal-overlay.open .apply-modal { transform:translateY(0); }
+
+  /* Red top accent */
+  .apply-modal::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--red),transparent); }
+
+  /* Modal header */
+  .modal-header {
+    padding:32px 36px 28px;
+    border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+  }
+  .modal-header-left {}
+  .modal-role-badge { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+  .modal-branch-tag { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--red); background:rgba(200,34,42,0.1); border:1px solid rgba(200,34,42,0.25); padding:4px 10px; border-radius:3px; }
+  .modal-type-tag { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--silver); background:var(--mid); border:1px solid var(--border); padding:4px 10px; border-radius:3px; }
+  .modal-title { font-family:var(--ff-display); font-size:clamp(24px,4vw,36px); letter-spacing:1px; color:var(--white); line-height:1; margin-bottom:8px; }
+  .modal-title span { color:var(--red); }
+  .modal-subtitle { font-size:13px; color:var(--silver); }
+  .modal-close {
+    background:var(--mid); border:1px solid var(--border);
+    color:var(--silver); width:36px; height:36px; border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; flex-shrink:0; transition:border-color 0.2s, color 0.2s;
+  }
+  .modal-close:hover { border-color:var(--red); color:var(--white); }
+
+  /* Progress */
+  .modal-progress { padding:16px 36px; border-bottom:1px solid var(--border); }
+  .modal-progress-label { display:flex; justify-content:space-between; font-size:11px; color:var(--silver); margin-bottom:6px; }
+  .modal-progress-bar { height:2px; background:var(--border); border-radius:2px; }
+  .modal-progress-fill { height:100%; background:var(--red); border-radius:2px; transition:width 0.4s ease; width:0%; }
+
+  /* Modal body */
+  .modal-body { padding:32px 36px; display:flex; flex-direction:column; gap:32px; }
+
+  .modal-section-title { font-family:var(--ff-display); font-size:18px; letter-spacing:1px; color:var(--white); margin-bottom:4px; }
+  .modal-section-desc { font-size:12px; color:var(--silver); margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+
+  .modal-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .modal-form-grid .full { grid-column:1/-1; }
+
+  .m-form-group { display:flex; flex-direction:column; gap:6px; }
+  .m-form-group label { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--silver); }
+  .m-form-group label .req { color:var(--red); }
+  .m-form-group input,
+  .m-form-group select,
+  .m-form-group textarea {
+    background:var(--card); border:1px solid var(--border);
+    color:var(--light); padding:11px 14px; font-size:14px;
+    font-family:var(--ff-body); border-radius:2px; outline:none; width:100%;
+    transition:border-color 0.2s;
+  }
+  .m-form-group input:focus,
+  .m-form-group select:focus,
+  .m-form-group textarea:focus { border-color:var(--red); }
+  .m-form-group textarea { resize:vertical; min-height:100px; }
+  .m-form-group select option { background:var(--card); }
+  .m-form-group input[type="file"] { padding:9px 14px; cursor:pointer; color:var(--silver); }
+  .m-form-group input[type="file"]::file-selector-button {
+    background:var(--mid); border:1px solid var(--border); color:var(--light);
+    padding:5px 12px; border-radius:2px; font-family:var(--ff-body);
+    font-size:11px; font-weight:600; cursor:pointer; margin-right:10px;
+  }
+  .char-wrap { display:flex; justify-content:flex-end; }
+  .char-wrap span { font-size:10px; color:var(--silver); }
+
+  .m-checkbox-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .m-checkbox-item { display:flex; align-items:center; gap:8px; cursor:pointer; }
+  .m-checkbox-item input { width:14px; height:14px; accent-color:var(--red); cursor:pointer; flex-shrink:0; }
+  .m-checkbox-item span { font-size:13px; color:var(--silver); }
+
+  /* Modal footer */
+  .modal-footer {
+    padding:24px 36px 32px;
+    border-top:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  }
+  .modal-submit-btn {
+    background:var(--red); color:var(--white); border:none;
+    padding:13px 32px; border-radius:4px; font-size:14px; font-weight:600;
+    letter-spacing:0.5px; cursor:pointer; font-family:var(--ff-body);
+    display:flex; align-items:center; gap:10px;
+    transition:background 0.2s, transform 0.15s;
+  }
+  .modal-submit-btn:hover { background:#a81c23; transform:translateY(-1px); }
+  .modal-submit-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+  .modal-note { font-size:11px; color:var(--silver); max-width:280px; line-height:1.6; }
+
+  /* Modal success */
+  .modal-success {
+    display:none; text-align:center; padding:56px 36px;
+  }
+  .modal-success.show { display:block; }
+  .modal-success-icon {
+    width:52px; height:52px; background:rgba(200,34,42,0.12); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color:var(--red); margin:0 auto 18px;
+  }
+  .modal-success h2 { font-family:var(--ff-display); font-size:32px; letter-spacing:1px; color:var(--white); margin-bottom:10px; }
+  .modal-success p { font-size:14px; color:var(--silver); max-width:340px; margin:0 auto 24px; line-height:1.7; }
+  .modal-close-btn {
+    display:inline-flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid var(--border); color:var(--light);
+    padding:11px 24px; border-radius:4px; cursor:pointer;
+    font-size:13px; font-weight:500; font-family:var(--ff-body);
+    transition:border-color 0.2s, color 0.2s;
+  }
+  .modal-close-btn:hover { border-color:var(--red); color:var(--white); }
+
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  /* Modal responsive */
+  @media(max-width:600px){
+    .apply-modal-overlay { padding:16px 0 32px; align-items:flex-end; }
+    .apply-modal { border-radius:4px 4px 0 0; max-width:100%; }
+    .modal-header { padding:24px 20px 20px; }
+    .modal-body { padding:24px 20px; gap:24px; }
+    .modal-footer { padding:20px; }
+    .modal-form-grid { grid-template-columns:1fr; }
+    .modal-form-grid .full { grid-column:1; }
+    .m-checkbox-grid { grid-template-columns:1fr 1fr; }
+    .modal-progress { padding:12px 20px; }
+  }
+
 </style></style>
 </head>
 <body>
@@ -390,6 +608,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#branches">Branches</a></li>
     <li><a href="#brands">Brands</a></li>
+    <li><a href="#careers">Careers</a></li>
     <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -403,6 +622,7 @@
   <a href="#about" class="mobile-link">About</a>
   <a href="#branches" class="mobile-link">Branches</a>
   <a href="#brands" class="mobile-link">Brands</a>
+  <a href="#careers" class="mobile-link">Careers</a>
   <a href="#contact" class="mobile-link mobile-cta">Get in Touch</a>
 </div>
 
@@ -569,6 +789,131 @@
   </div>
 </section>
 
+
+<!-- CAREERS -->
+<section class="careers" id="careers">
+  <div class="careers-header">
+    <div>
+      <p class="eyebrow reveal">Join the Team</p>
+      <h2 class="section-title reveal reveal-delay-1">CAREERS AT<br>ARGON STEEL</h2>
+      <p class="section-sub reveal reveal-delay-2">We're always looking for driven, hardworking people to grow with us across our branches.</p>
+    </div>
+    <div class="careers-filters reveal reveal-delay-2">
+      <button class="filter-btn active" data-filter="all">All Branches</button>
+      <button class="filter-btn" data-filter="athlone">Athlone</button>
+      <button class="filter-btn" data-filter="mitchells-plain">Mitchell's Plain</button>
+      <button class="filter-btn" data-filter="blue-downs">Blue Downs</button>
+    </div>
+  </div>
+
+  <div class="jobs-grid" id="jobs-grid">
+
+    <div class="job-card reveal" data-branch="athlone">
+      <div class="job-meta">
+        <span class="job-branch-tag">Athlone</span>
+        <span class="job-type-tag">Full-Time</span>
+      </div>
+      <h3>STEEL SALES CONSULTANT</h3>
+      <p>Assist walk-in customers and trade clients in selecting the right steel products and hardware. Build lasting relationships and drive branch sales targets.</p>
+      <div class="job-footer">
+        <span class="job-salary">Negotiable</span>
+        <a href="#" class="job-apply open-apply" data-role="Steel Sales Consultant" data-branch="Athlone" data-type="Full-Time" data-email="ebrahim@argonsteel.co.za" class="job-apply">
+          Apply Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="job-card reveal reveal-delay-1" data-branch="athlone">
+      <div class="job-meta">
+        <span class="job-branch-tag">Athlone</span>
+        <span class="job-type-tag">Full-Time</span>
+      </div>
+      <h3>WAREHOUSE SUPERVISOR</h3>
+      <p>Oversee daily warehouse operations, stock management, and dispatch. Ensure accurate inventory and lead a small team to maintain efficiency and safety standards.</p>
+      <div class="job-footer">
+        <span class="job-salary">Negotiable</span>
+        <a href="#" class="job-apply open-apply" data-role="Warehouse Supervisor" data-branch="Athlone" data-type="Full-Time" data-email="ebrahim@argonsteel.co.za" class="job-apply">
+          Apply Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="job-card reveal reveal-delay-2" data-branch="mitchells-plain">
+      <div class="job-meta">
+        <span class="job-branch-tag">Mitchell's Plain</span>
+        <span class="job-type-tag">Full-Time</span>
+      </div>
+      <h3>BRANCH SALES ASSISTANT</h3>
+      <p>Support the sales team with customer service, product knowledge, and stock handling. Ideal for someone passionate about the hardware and steel industry.</p>
+      <div class="job-footer">
+        <span class="job-salary">Negotiable</span>
+        <a href="#" class="job-apply open-apply" data-role="Branch Sales Assistant" data-branch="Mitchell's Plain" data-type="Full-Time" data-email="tasneemj@argonsteel.co.za" class="job-apply">
+          Apply Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="job-card reveal reveal-delay-1" data-branch="blue-downs">
+      <div class="job-meta">
+        <span class="job-branch-tag">Blue Downs</span>
+        <span class="job-type-tag">Part-Time</span>
+      </div>
+      <h3>YARD ASSISTANT</h3>
+      <p>Assist with loading, offloading, and organising steel stock in the yard. Physical role suited to someone reliable, safety-conscious and a team player.</p>
+      <div class="job-footer">
+        <span class="job-salary">Negotiable</span>
+        <a href="#" class="job-apply open-apply" data-role="Yard Assistant" data-branch="Blue Downs" data-type="Part-Time" data-email="leyaket@argonsteel.co.za" class="job-apply">
+          Apply Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="job-card reveal reveal-delay-2" data-branch="blue-downs">
+      <div class="job-meta">
+        <span class="job-branch-tag">Blue Downs</span>
+        <span class="job-type-tag">Full-Time</span>
+      </div>
+      <h3>COUNTER SALES REP</h3>
+      <p>Handle over-the-counter sales, quotations, and customer queries. Strong communication skills and product knowledge in steel or hardware is a plus.</p>
+      <div class="job-footer">
+        <span class="job-salary">Negotiable</span>
+        <a href="#" class="job-apply open-apply" data-role="Counter Sales Rep" data-branch="Blue Downs" data-type="Full-Time" data-email="leyaket@argonsteel.co.za" class="job-apply">
+          Apply Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="job-card reveal reveal-delay-3" data-branch="mitchells-plain">
+      <div class="job-meta">
+        <span class="job-branch-tag">Mitchell's Plain</span>
+        <span class="job-type-tag">Full-Time</span>
+      </div>
+      <h3>DELIVERY DRIVER</h3>
+      <p>Responsible for timely and safe delivery of steel and hardware products to clients across Cape Town. Valid PDP and clean driving record required.</p>
+      <div class="job-footer">
+        <span class="job-salary">Negotiable</span>
+        <a href="#" class="job-apply open-apply" data-role="Delivery Driver" data-branch="Mitchell's Plain" data-type="Full-Time" data-email="tasneemj@argonsteel.co.za" class="job-apply">
+          Apply Now <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M7 2l5 5-5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="careers-empty" id="careers-empty">
+    <svg class="careers-empty-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+      <rect x="8" y="12" width="32" height="28" rx="2"/>
+      <path d="M16 12V10a8 8 0 0 1 16 0v2"/>
+      <line x1="24" y1="22" x2="24" y2="32"/>
+      <line x1="19" y1="27" x2="29" y2="27"/>
+    </svg>
+    <h3>NO OPENINGS AT THIS BRANCH</h3>
+    <p>There are no vacancies at this branch right now. Check back soon or send your CV to <a href="mailto:info@argonsteel.co.za" style="color:var(--red);">info@argonsteel.co.za</a> and we'll keep you in mind.</p>
+  </div>
+  <p class="jobs-count" id="jobs-count">Showing <span id="jobs-visible-count">6</span> of 6 positions</p>
+</section>
+
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
@@ -715,6 +1060,37 @@
     setTimeout(() => document.getElementById('form-success').classList.remove('show'), 5000);
   });
 
+
+  // Careers branch filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const jobCards = document.querySelectorAll('.job-card');
+  const emptyState = document.getElementById('careers-empty');
+  const jobsGrid = document.getElementById('jobs-grid');
+  const visibleCount = document.getElementById('jobs-visible-count');
+  const totalJobs = jobCards.length;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      let visible = 0;
+
+      jobCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.branch === filter;
+        card.setAttribute('data-hidden', !match);
+        if(match) visible++;
+      });
+
+      // Show/hide empty state
+      emptyState.classList.toggle('visible', visible === 0);
+      jobsGrid.style.display = visible === 0 ? 'none' : '';
+      visibleCount.textContent = visible;
+    });
+  });
+
   // Smooth anchor scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
@@ -722,6 +1098,338 @@
       if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
     });
   });
+</script>
+
+<!-- APPLY MODAL -->
+<div class="apply-modal-overlay" id="applyModalOverlay">
+  <div class="apply-modal" id="applyModal">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-role-badge">
+          <span class="modal-branch-tag" id="m-branch-tag">Branch</span>
+          <span class="modal-type-tag" id="m-type-tag">Full-Time</span>
+        </div>
+        <div class="modal-title">APPLY FOR <span id="m-role-title">POSITION</span></div>
+        <div class="modal-subtitle">Complete the form below — we'll get back to you within 5–7 working days.</div>
+      </div>
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l10 10M13 3L3 13"/></svg>
+      </button>
+    </div>
+
+    <!-- Progress -->
+    <div class="modal-progress">
+      <div class="modal-progress-label"><span>Form progress</span><span id="m-pct">0%</span></div>
+      <div class="modal-progress-bar"><div class="modal-progress-fill" id="m-progress-fill"></div></div>
+    </div>
+
+    <!-- Form -->
+    <form id="modalApplyForm" novalidate>
+      <input type="hidden" id="m-f-role">
+      <input type="hidden" id="m-f-branch">
+      <input type="hidden" id="m-f-email">
+
+      <div class="modal-body">
+
+        <!-- Personal Info -->
+        <div>
+          <div class="modal-section-title">Personal Information</div>
+          <div class="modal-section-desc">Tell us how to reach you.</div>
+          <div class="modal-form-grid">
+            <div class="m-form-group"><label>First Name <span class="req">*</span></label><input type="text" name="first_name" placeholder="John" required></div>
+            <div class="m-form-group"><label>Last Name <span class="req">*</span></label><input type="text" name="last_name" placeholder="Smith" required></div>
+            <div class="m-form-group"><label>Email <span class="req">*</span></label><input type="email" name="email" placeholder="john@example.com" required></div>
+            <div class="m-form-group"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" placeholder="071 000 0000" required></div>
+            <div class="m-form-group"><label>City / Town</label><input type="text" name="city" placeholder="Cape Town"></div>
+            <div class="m-form-group"><label>Nearest Branch</label>
+              <select name="nearest_branch" id="m-nearest-branch">
+                <option value="">Select</option>
+                <option>Athlone</option>
+                <option>Mitchell's Plain</option>
+                <option>Blue Downs</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div>
+          <div class="modal-section-title">Experience</div>
+          <div class="modal-section-desc">Help us understand your background.</div>
+          <div class="modal-form-grid">
+            <div class="m-form-group"><label>Years of Experience</label>
+              <select name="experience">
+                <option value="">Select</option>
+                <option>Less than 1 year</option>
+                <option>1–2 years</option>
+                <option>3–5 years</option>
+                <option>6–10 years</option>
+                <option>10+ years</option>
+              </select>
+            </div>
+            <div class="m-form-group"><label>Highest Qualification</label>
+              <select name="qualification">
+                <option value="">Select</option>
+                <option>Grade 10</option>
+                <option>Grade 11</option>
+                <option>Grade 12 / Matric</option>
+                <option>Certificate / Diploma</option>
+                <option>Degree</option>
+              </select>
+            </div>
+            <div class="m-form-group full"><label>Current / Last Employer</label><input type="text" name="employer" placeholder="Company name (or N/A)"></div>
+            <div class="m-form-group full">
+              <label>Relevant Skills & Experience <span class="req">*</span></label>
+              <textarea id="m-skills" name="skills" maxlength="600" placeholder="Describe your skills and why you're a good fit..." required></textarea>
+              <div class="char-wrap"><span><span id="m-skills-count">0</span>/600</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role questions (injected by JS) -->
+        <div id="m-role-section">
+          <div class="modal-section-title">Role Questions</div>
+          <div class="modal-section-desc">A few quick questions specific to this position.</div>
+          <div class="modal-form-grid" id="m-role-questions"></div>
+        </div>
+
+        <!-- Availability -->
+        <div>
+          <div class="modal-section-title">Availability</div>
+          <div class="modal-section-desc">When can you start and which days are you available?</div>
+          <div class="modal-form-grid">
+            <div class="m-form-group"><label>Start Date</label>
+              <select name="start_date">
+                <option value="">Select</option>
+                <option>Immediately</option>
+                <option>Within 2 weeks</option>
+                <option>Within 1 month</option>
+                <option>Within 3 months</option>
+              </select>
+            </div>
+            <div class="m-form-group"><label>Employment Preference</label>
+              <select name="emp_type">
+                <option value="">Select</option>
+                <option>Full-Time only</option>
+                <option>Part-Time only</option>
+                <option>Either</option>
+              </select>
+            </div>
+            <div class="m-form-group full"><label>Days Available</label>
+              <div class="m-checkbox-grid">
+                <label class="m-checkbox-item"><input type="checkbox" name="days" value="Monday"><span>Monday</span></label>
+                <label class="m-checkbox-item"><input type="checkbox" name="days" value="Tuesday"><span>Tuesday</span></label>
+                <label class="m-checkbox-item"><input type="checkbox" name="days" value="Wednesday"><span>Wednesday</span></label>
+                <label class="m-checkbox-item"><input type="checkbox" name="days" value="Thursday"><span>Thursday</span></label>
+                <label class="m-checkbox-item"><input type="checkbox" name="days" value="Friday"><span>Friday</span></label>
+                <label class="m-checkbox-item"><input type="checkbox" name="days" value="Saturday"><span>Saturday</span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documents -->
+        <div>
+          <div class="modal-section-title">Documents</div>
+          <div class="modal-section-desc">Upload your CV and any supporting documents. PDF or Word preferred.</div>
+          <div class="modal-form-grid">
+            <div class="m-form-group full"><label>CV / Resume <span class="req">*</span></label><input type="file" name="cv" accept=".pdf,.doc,.docx" required></div>
+            <div class="m-form-group full"><label>Cover Letter <span style="font-size:10px;color:var(--silver);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label><input type="file" name="cover_letter" accept=".pdf,.doc,.docx"></div>
+            <div class="m-form-group full"><label>Additional Notes</label><textarea name="notes" placeholder="Anything else you'd like us to know?" style="min-height:80px;"></textarea></div>
+          </div>
+        </div>
+
+      </div><!-- /modal-body -->
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button type="submit" class="modal-submit-btn" id="m-submit-btn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+          Submit Application
+        </button>
+        <p class="modal-note">By submitting you confirm all information is accurate. Your details will only be used for this application.</p>
+      </div>
+    </form>
+
+    <!-- Success -->
+    <div class="modal-success" id="m-success">
+      <div class="modal-success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+      </div>
+      <h2>APPLICATION SENT!</h2>
+      <p>Thanks for applying for <strong id="m-success-role"></strong> at our <strong id="m-success-branch"></strong> branch. We'll be in touch within 5–7 working days.</p>
+      <button class="modal-close-btn" id="m-success-close">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg>
+        Back to Careers
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+  // ── APPLY MODAL ──
+
+  const roleQMap = {
+    'Steel Sales Consultant': [
+      { label:'Do you have experience in steel or hardware sales?', name:'steel_exp', options:['Yes – extensive','Yes – some','No but willing to learn'] },
+      { label:'Comfortable working towards sales targets?', name:'targets', options:['Yes, very','Somewhat','Not yet but open'] },
+      { label:'Do you hold a valid driver\'s licence?', name:'licence', options:['Yes','No','Learner\'s'] },
+    ],
+    'Warehouse Supervisor': [
+      { label:'Have you supervised a team before?', name:'team_lead', options:['Yes – 5+ people','Yes – small team','No, first time'] },
+      { label:'ERP or stock management experience?', name:'erp', options:['Yes – extensive','Some','No'] },
+      { label:'Familiar with health & safety regulations?', name:'safety', options:['Yes – certified','General knowledge','Not yet'] },
+    ],
+    'Branch Sales Assistant': [
+      { label:'Retail or counter sales experience?', name:'retail_exp', options:['1+ year','Less than 1 year','No'] },
+      { label:'Comfortable with manual stock handling?', name:'manual', options:['Yes, no problem','Somewhat','Prefer not to'] },
+    ],
+    'Yard Assistant': [
+      { label:'Comfortable with physical labour (lifting, loading)?', name:'physical', options:['Yes, very','Somewhat','Need to discuss'] },
+      { label:'Forklift or equipment operating experience?', name:'forklift', options:['Yes – certified','Informal experience','No'] },
+    ],
+    'Counter Sales Rep': [
+      { label:'Product knowledge in steel or hardware?', name:'product_knowledge', options:['Excellent','Good','Basic','None yet'] },
+      { label:'Can you prepare quotes and process invoices?', name:'quoting', options:['Yes, confidently','With guidance','Not yet'] },
+    ],
+    'Delivery Driver': [
+      { label:'Valid driver\'s licence with PDP?', name:'pdp', options:['Yes – valid PDP','Licence only','Neither'] },
+      { label:'Years of driving experience?', name:'drive_exp', options:['Less than 1','1–3 years','4–7 years','8+ years'] },
+      { label:'Clean driving record?', name:'clean_record', options:['Yes, clean','Minor infringements','I\'d like to discuss'] },
+    ],
+  };
+
+  const overlay       = document.getElementById('applyModalOverlay');
+  const modal         = document.getElementById('applyModal');
+  const closeBtn      = document.getElementById('modalCloseBtn');
+  const modalForm     = document.getElementById('modalApplyForm');
+  const mSubmitBtn    = document.getElementById('m-submit-btn');
+  const mSuccess      = document.getElementById('m-success');
+  const mSuccessClose = document.getElementById('m-success-close');
+  const mProgressFill = document.getElementById('m-progress-fill');
+  const mPct          = document.getElementById('m-pct');
+
+  function openModal(role, branch, type, email) {
+    // Reset
+    modalForm.style.display = '';
+    modalForm.reset();
+    mSuccess.classList.remove('show');
+    mProgressFill.style.width = '0%';
+    mPct.textContent = '0%';
+    mSubmitBtn.disabled = false;
+    mSubmitBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg> Submit Application';
+    document.querySelectorAll('.m-form-group input, .m-form-group select, .m-form-group textarea').forEach(el => el.style.borderColor = '');
+
+    // Fill in role info
+    document.getElementById('m-role-title').textContent  = role.toUpperCase();
+    document.getElementById('m-branch-tag').textContent  = branch;
+    document.getElementById('m-type-tag').textContent    = type;
+    document.getElementById('m-f-role').value            = role;
+    document.getElementById('m-f-branch').value          = branch;
+    document.getElementById('m-f-email').value           = email;
+
+    // Pre-select nearest branch
+    const nb = document.getElementById('m-nearest-branch');
+    for(let o of nb.options){ if(o.value === branch){ o.selected = true; break; } }
+
+    // Inject role-specific questions
+    const qContainer = document.getElementById('m-role-questions');
+    qContainer.innerHTML = '';
+    const qs = roleQMap[role] || [{ label:'Why are you interested in this role?', name:'interest', options:[] }];
+    qs.forEach(q => {
+      const g = document.createElement('div');
+      g.className = 'm-form-group full';
+      const lbl = document.createElement('label');
+      lbl.textContent = q.label;
+      g.appendChild(lbl);
+      if(q.options && q.options.length){
+        const sel = document.createElement('select');
+        sel.name = q.name;
+        const def = document.createElement('option');
+        def.value = ''; def.textContent = 'Select an answer';
+        sel.appendChild(def);
+        q.options.forEach(o => { const opt = document.createElement('option'); opt.value = o; opt.textContent = o; sel.appendChild(opt); });
+        g.appendChild(sel);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.name = q.name; ta.placeholder = 'Your answer...'; ta.style.minHeight = '80px';
+        g.appendChild(ta);
+      }
+      qContainer.appendChild(g);
+      // Rebind progress tracking for new inputs
+      g.querySelectorAll('input,select,textarea').forEach(el => el.addEventListener('input', updateModalProgress));
+    });
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    modal.scrollTop = 0;
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Open on "Apply Now" click
+  document.querySelectorAll('.open-apply').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      openModal(
+        btn.dataset.role,
+        btn.dataset.branch,
+        btn.dataset.type,
+        btn.dataset.email
+      );
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  mSuccessClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+  // Progress tracking
+  function updateModalProgress() {
+    const all = modalForm.querySelectorAll('input:not([type=hidden]):not([type=checkbox]):not([type=file]), select, textarea');
+    let filled = 0;
+    all.forEach(el => { if(el.value.trim()) filled++; });
+    const pct = Math.min(100, Math.round((filled / all.length) * 100));
+    mProgressFill.style.width = pct + '%';
+    mPct.textContent = pct + '%';
+  }
+  modalForm.addEventListener('input', updateModalProgress);
+  modalForm.addEventListener('change', updateModalProgress);
+
+  // Char counter
+  const mSkills = document.getElementById('m-skills');
+  const mSkillsCount = document.getElementById('m-skills-count');
+  mSkills.addEventListener('input', () => { mSkillsCount.textContent = mSkills.value.length; });
+
+  // Submit
+  modalForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+    modalForm.querySelectorAll('[required]').forEach(el => {
+      if(!el.value.trim()){ el.style.borderColor = 'var(--red)'; valid = false; }
+      else { el.style.borderColor = ''; }
+    });
+    if(!valid) return;
+
+    mSubmitBtn.disabled = true;
+    mSubmitBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 0.8s linear infinite"><path d="M8 2a6 6 0 1 0 6 6"/></svg> Submitting...';
+
+    setTimeout(() => {
+      modalForm.style.display = 'none';
+      document.getElementById('m-success-role').textContent   = document.getElementById('m-f-role').value;
+      document.getElementById('m-success-branch').textContent = document.getElementById('m-f-branch').value;
+      mSuccess.classList.add('show');
+    }, 1400);
+  });
+
 </script>
 </body>
 </html>
